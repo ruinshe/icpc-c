@@ -4,11 +4,12 @@
 #include <algorithm>
 
 struct heap_t {
-  int h[MaxH], pos[MaxH];
+  int h[MaxH], d[MaxH], pos[MaxH];
   int n;
 
-  inline void init() {
+  inline void init(int maxId) {
     n = 0;
+    for (int i = 0; i <= maxId; i++) pos[i] = -1;
   }
 
   inline int poll() {
@@ -29,8 +30,8 @@ struct heap_t {
   inline void sink(int k) {
     while (k <= n) {
       int idx = k, lhs = k << 1, rhs = k << 1 | 1;
-      if (lhs <= n && comp(h[lhs], h[idx])) idx = lhs;
-      if (rhs <= n && comp(h[rhs], h[idx])) idx = rhs;
+      if (lhs <= n && d[h[lhs]] < d[h[idx]]) idx = lhs;
+      if (rhs <= n && d[h[rhs]] < d[h[idx]]) idx = rhs;
       if (idx == k) break;
       else {
         std::swap(h[idx], h[k]);
@@ -44,7 +45,7 @@ struct heap_t {
   inline void swin(int k) {
     while (k > 1) {
       int p = k >> 1;
-      if (comp(h[k], h[p])) {
+      if (d[h[k]] < d[h[p]]) {
         std::swap(h[k], h[p]);
         pos[h[k]] = k;
         pos[h[p]] = p;
@@ -55,11 +56,15 @@ struct heap_t {
     }
   }
 
-  inline void add(int k) {
-    h[++n] = k;
-    pos[k] = n;
-    swin(n);
+  inline void add(int k, int v) {
+    if (pos[k] == -1) {
+      h[++n] = k;
+      pos[k] = n;
+    }
+    d[k] = v;
+    sink(pos[k]);
+    swin(pos[k]);
   }
-} heap;
+};
 
 #endif

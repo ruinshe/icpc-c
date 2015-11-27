@@ -9,9 +9,12 @@ std::ostream& out = std::cout;
 
 const int MaxN = 5005;
 
+void solve() {
+}
+
 int main() {
   std::ios_base::sync_with_stdio(false);
   out.precision(16);
-
+  solve();
   return 0;
 }

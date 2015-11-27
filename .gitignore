@@ -1,6 +1,6 @@
 /__output.cc
-/data.in
-/data.out
+/*.in
+/*.out
 /main
 /.idea/
 /output/
