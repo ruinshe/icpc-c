@@ -6,26 +6,25 @@
 #include <functional>
 #include "graph.hpp"
 
-std::priority_queue<
-    std::pair<long long, int>,
-    std::vector<std::pair<long long, int> >,
-    std::greater<std::pair<long long, int> > > queue;
+const int MaxH = MaxN;
 
-void dijkstra(int s, int n, edge_t **head, long long *distance) {
+#include "../ds/heap.hpp"
+
+void dijkstra(int s, int n, edge_t **head, long long *distance, int *pre = NULL) {
+  static heap_t<long long> heap;
   for (int i = 1; i <= n; i++) distance[i] = 0x3F3F3F3F3F3F3F3FLL;
   int u, v;
-  queue.push({0, s});
+  heap.init(n);
+  heap.add(s, 0);
   distance[s] = 0;
-  while (!queue.empty()) {
-    const auto value = queue.top();
-    queue.pop();
-    if (distance[value.second] != value.first) continue;
-    u = value.second;
+  while (!heap.empty()) {
+    u = heap.peek();
     for (edge_t *iter = head[u]; iter; iter = iter->next) {
       v = iter->to;
       if (distance[v] - distance[u] > iter->weight) {
         distance[v] = distance[u] + iter->weight;
-        queue.push({distance[v], v});
+        if (pre) pre[v] = u;
+        heap.add(v, distance[v]);
       }
     }
   }

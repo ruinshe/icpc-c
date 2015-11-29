@@ -1,7 +1,10 @@
 /__output.cc
 /*.in
 /*.out
+/*.exe
+/*.bin
 /main
+/tasks/
 /.idea/
 /output/
 /testrunner/

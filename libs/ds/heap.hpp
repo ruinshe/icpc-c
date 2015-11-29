@@ -3,8 +3,10 @@
 
 #include <algorithm>
 
+template<typename T>
 struct heap_t {
-  int h[MaxH], d[MaxH], pos[MaxH];
+  int h[MaxH], pos[MaxH];
+  T d[MaxH];
   int n;
 
   inline void init(int maxId) {
@@ -56,7 +58,7 @@ struct heap_t {
     }
   }
 
-  inline void add(int k, int v) {
+  inline void add(int k, T v) {
     if (pos[k] == -1) {
       h[++n] = k;
       pos[k] = n;
@@ -64,6 +66,22 @@ struct heap_t {
     d[k] = v;
     sink(pos[k]);
     swin(pos[k]);
+  }
+
+  inline void remove(int k) {
+    if (pos[k] == -1) return;
+    int p = pos[k];
+    pos[k] = -1;
+    h[p] = h[n];
+    if (p != n--) {
+      pos[h[p]] = p;
+      sink(p);
+      swin(p);
+    }
+  }
+
+  bool empty() {
+    return n == 0;
   }
 };
 
