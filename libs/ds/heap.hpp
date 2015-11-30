@@ -14,6 +14,10 @@ struct heap_t {
     for (int i = 0; i <= maxId; i++) pos[i] = -1;
   }
 
+  inline T top() {
+    return d[h[1]];
+  }
+
   inline int poll() {
     return h[1];
   }
@@ -59,10 +63,7 @@ struct heap_t {
   }
 
   inline void add(int k, T v) {
-    if (pos[k] == -1) {
-      h[++n] = k;
-      pos[k] = n;
-    }
+    if (pos[k] == -1) h[pos[k] = ++n] = k;
     d[k] = v;
     sink(pos[k]);
     swin(pos[k]);
