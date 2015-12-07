@@ -5,7 +5,7 @@ struct node_t {
   node_t *c[2], *p;
   int key, s;
   bool rev;
-} memo[MAX], *nil, *pt[MAX], *st[MAX];
+} memo[MaxN], *nil, *pt[MaxN], *st[MaxN];
 
 struct lct_t {
   void init(node_t *x) {
@@ -14,7 +14,7 @@ struct lct_t {
     x->rev = false;
   }
 
-  void init() {
+  void init(int n) {
     pt[0] = nil = &memo[0];
     // nil->size=0;
     for (int i = 1; i <= n; i++)
@@ -65,7 +65,7 @@ struct lct_t {
 
   void reverse(node_t *x) {
     if (x != nil) {
-      swap(x->c[0], x->c[1]);
+      std::swap(x->c[0], x->c[1]);
       x->rev ^= 1;
     }
   }
@@ -103,7 +103,7 @@ struct lct_t {
     return x;
   }
 
-  void getPath(node_t *x, node_t *y) {
+  void query(node_t *x, node_t *y) {
     //path: v => u => u->c[1]
     //to calculate edge's weight, u can not be included
     node_t *ry = head(expose(y)), *rx = head(expose(x));
@@ -112,13 +112,16 @@ struct lct_t {
       for (node_t *u = y, *v = nil; u != nil; u = u->p) {
         splay(u);
         if (u->p == nil) {
-          printf("%d\n", v->s + u->key + u->c[1]->s);
+          tackle(v, u);
           return;
         }
         u->c[1] = v, update(v = u);
       }
     }
   }
+  
+  // path from first -> second(only) -> second->c[1]
+  void tackle(node_t* first, node_t* second);
 
   void setRoot(node_t *x) {
     reverse(expose(x));
