@@ -21,10 +21,17 @@ struct point_t {
 };
 
 template<typename T>
-inline bool compPoly(const point_t<T> lhs, const point_t<T> rhs) {
+inline bool compPoly(const point_t<T>& lhs, const point_t<T>& rhs) {
   int fd = lhs.getId() - rhs.getId();
   if (fd) return fd < 0;
   else return lhs * rhs > 0;
+}
+
+template<typename T>
+inline bool compCoord(const point_t<T>& lhs, const point_t<T>& rhs) {
+  int fd = sgn(lhs.x - rhs.x);
+  if (fd) return fd < 0;
+  else return sgn(lhs.y - rhs.y) < 0;
 }
 
 template<typename T>
