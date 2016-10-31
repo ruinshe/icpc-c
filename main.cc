@@ -1,6 +1,10 @@
-#include <bits/stdc++.h>
-
-const int MaxN = 100005;
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <algorithm>
+#include <queue>
+#include <vector>
+#include <functional>
 
 int main() {
   return 0;
