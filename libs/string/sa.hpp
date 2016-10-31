@@ -33,10 +33,8 @@ void calc_sa(T *s, int *sa, int len, int charsize) {
   }
 }
 
-int h[MaxN];
-
 template<typename T>
-void calc_height(T *s, int *sa, int len) {
+void calc_height(T *s, int *sa, int *h, int len) {
   for (int i = 1; i <= len; i++) rank[sa[i]] = i;
   for (int i = 0, k = 0; i < len; i++) {
     if (k > 0) k--;
@@ -44,6 +42,15 @@ void calc_height(T *s, int *sa, int len) {
     while (s[i + k] == s[j + k]) k++;
     h[rank[i]] = k;
   }
+}
+
+inline void print_sa(int *s, int start, int len) {
+  for (int i = start; i <= len; i++) {
+    if (s[i] == 0) putchar('#');
+    else if (s[i] == 1) putchar('*');
+    else putchar(s[i]);
+  }
+  puts("");
 }
 
 /**
