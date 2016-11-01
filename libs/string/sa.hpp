@@ -1,7 +1,7 @@
 #ifndef SA_H
 #define SA_H
 
-int wa[MaxN], wb[MaxN], wv[MaxN], rank[MaxN];
+int wa[MaxN], wb[MaxN], wv[MaxN], rank[MaxN], to[MaxN];
 
 inline bool equals(int* y, int a, int b, int len) {
   return y[a] == y[b] && y[a + len] == y[b + len];
@@ -44,7 +44,8 @@ void calc_height(T *s, int *sa, int *h, int len) {
   }
 }
 
-inline void print_sa(int *s, int start, int len) {
+template<typename T>
+inline void print_sa(T *s, int start, int len) {
   for (int i = start; i <= len; i++) {
     if (s[i] == 0) putchar('#');
     else if (s[i] == 1) putchar('*');
@@ -53,9 +54,29 @@ inline void print_sa(int *s, int start, int len) {
   puts("");
 }
 
+void calc_rmq(int dp[MaxL][MaxN], int len) {
+  to[0] = to[1] = 0;
+  for (int i = 1; (i << 1) < MaxN; i++) {
+    to[i << 1] = to[i << 1 | 1] = to[i] + 1;
+  }
+
+  for (int i = 1; (1 << i) <= len; i++) {
+    for (int j = 0; j <= len; j++) {
+      dp[i][j] = std::min(dp[i - 1][j], dp[i - 1][std::min(len, j + (1 << (i - 1)))]);
+    }
+  }
+}
+
+inline int calc_min(int a, int b) {
+  if (a > b) std::swap(a, b);
+  a++;
+  int r = to[b - a];
+  return std::min(dp[r][a], dp[r][b + 1 - (1 << r)]);
+}
+
 /**
 calc_sa(s, sa, len + 1, 128);
-calc_height(s, sa, len);
+calc_height(s, sa, h, len);
 */
 
 #endif /* SA_H */
