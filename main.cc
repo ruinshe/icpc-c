@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <queue>
 #include <vector>
+#include <numeric>
 #include <functional>
 
 int main() {
