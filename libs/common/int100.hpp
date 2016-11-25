@@ -22,7 +22,11 @@ struct int100_t {
     return int100_t(high ^ other.high, low ^ other.low);
   }
   int100_t operator<<(const int& d) const {
-    return int100_t((high << d) | (low >> (50 - d)), low << d);
+    if (d >= 50) {
+      return int100_t(low << (d - 50), 0);
+    } else {
+      return int100_t((high << d) | (low >> (50 - d)), low << d);
+    }
   }
   int bitcount() const { return __builtin_popcountll(high) + __builtin_popcountll(low); }
   bool operator==(const int100_t& other) const {
