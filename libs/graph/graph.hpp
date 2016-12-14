@@ -1,12 +1,11 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-struct edge_t {
-  int to, weight;
-  edge_t *next;
-} edges[MaxE], *cure;
+#define MACRO_GRAPH_EXTRA_FIELDS int weight;
 
-inline void add_edge(edge_t **head, int u, int v, int weight = 0) {
+#include "simple_graph.hpp"
+
+inline void add_edge(edge_t** head, int u, int v, int weight) {
   cure->to = v;
   cure->weight = weight;
   cure->next = head[u];
