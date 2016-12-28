@@ -45,11 +45,14 @@ void calc_height(T *s, int *sa, int *h, int len) {
 }
 
 template<typename T>
-inline void print_sa(T *s, int start, int len) {
+inline void print_sa(T *s, int start, int len, int offset) {
   for (int i = start; i <= len; i++) {
-    if (s[i] == 0) putchar('#');
-    else if (s[i] == 1) putchar('*');
-    else putchar(s[i]);
+    int c = s[i] - offset + 'a';
+    if (c >= 'a' && c <= 'z') {
+      putchar(c);
+    } else {
+      printf("[%d]", s[i]);
+    }
   }
   puts("");
 }
@@ -67,7 +70,7 @@ void calc_rmq(int dp[MaxL][MaxN], int len) {
   }
 }
 
-inline int calc_min(int a, int b) {
+inline int calc_min(int dp[MaxL][MaxN], int a, int b) {
   if (a > b) std::swap(a, b);
   a++;
   int r = to[b - a];
