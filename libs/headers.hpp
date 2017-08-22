@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cmath>
 #include <cstring>
 #include <cstdlib>
 #include <algorithm>
@@ -15,4 +16,8 @@
 #include <tuple>
 #include <cassert>
 
+namespace {
+
 #define for_each_test_cases(T) int T; scanf("%d", &T); for (int cas = 1; cas <= T; cas++)
+
+}  // namesapce
