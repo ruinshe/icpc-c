@@ -4,11 +4,11 @@
 #include <queue>
 #include <vector>
 #include <functional>
-#include "graph.hpp"
+#include "graph.h"
 
 const int MaxH = MaxN;
 
-#include "../ds/heap.hpp"
+#include "../ds/heap.h"
 
 void dijkstra(int s, int n, edge_t **head, long long *distance, int destination, int *pre = NULL) {
   static heap_t<long long> heap;

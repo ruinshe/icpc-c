@@ -1,8 +1,8 @@
 #ifndef SEGMENT_H
 #define SEGMENT_H
 
-#include "geo.hpp"
-#include "point.hpp"
+#include "geo.h"
+#include "point.h"
 
 template<typename T>
 struct segment_t {

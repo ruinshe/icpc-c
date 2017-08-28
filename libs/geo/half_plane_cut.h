@@ -1,7 +1,7 @@
 #ifndef HALF_PLANE_CUT_H
 #define HALF_PLANE_CUT_H
 
-#include "line.hpp"
+#include "line.h"
 
 void half_plane_cut(line_t<double> *l, int n, point_t<double> *output, int &top) {
   int f, b;

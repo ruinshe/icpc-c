@@ -2,7 +2,7 @@
 #define UNDIRECTED_BCC_H
 
 #include <algorithm>
-#include "graph.hpp"
+#include "graph.h"
 
 edge_t *undirected_head[MaxN];
 bool used[MaxE], visited[MaxN], bridge[MaxE];

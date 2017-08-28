@@ -3,7 +3,7 @@
 
 #define MACRO_GRAPH_EXTRA_FIELDS int weight;
 
-#include "simple_graph.hpp"
+#include "simple_graph.h"
 
 inline void add_edge(edge_t** head, int u, int v, int weight) {
   cure->to = v;

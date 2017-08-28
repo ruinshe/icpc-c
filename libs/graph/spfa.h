@@ -1,7 +1,7 @@
 #ifndef SPFA_H
 #define SPFA_H
 
-#include "graph.hpp"
+#include "graph.h"
 
 void spfa(int s, int n, edge_t **head, long long *distance) {
   static int queue[MaxN];
