@@ -27,10 +27,11 @@ struct edge_t {
   
 } edges[MaxE], *cure;
 
-inline void add_edge(edge_t** head, int u, int v) {
+inline edge_t* add_edge(edge_t** head, int u, int v) {
   cure->to = v;
   cure->next = head[u];
-  head[u] = cure++;
+  head[u] = cure;
+  return cure++;
 }
 
 #define foreach(head, iter) for (edge_t::iterator it = head; it.has_next(); it++)
