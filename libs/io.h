@@ -9,6 +9,7 @@ public:
   TokenizeReader(FILE* file, int buffer_len);
   ~TokenizeReader();
   void Read(char* s, size_t& len, int max_len = std::numeric_limits<int>::max());
+  bool HasNext();
   int NextInt();
 private:
   bool EnsureRead();
@@ -37,11 +38,18 @@ void TokenizeReader::Read(char *s, size_t &len, int max_len) {
   }
 }
 
+bool TokenizeReader::HasNext() {
+  static size_t unused;
+  Read(nullptr, unused, 0);
+  return EnsureRead();
+}
+
 int TokenizeReader::NextInt() {
   static char buf[21];
   size_t len;
   int value;
   Read(buf, len, 20);
+  if (len == 0) throw -1;
   buf[len] = 0;
   sscanf(buf, "%d", &value);
   return value;

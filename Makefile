@@ -14,10 +14,12 @@ all: main.bin
 
 %.d: %.cc
 	@echo $(DEPTOKEN) > $@
-	makedepend -Y -f $@ -s $(DEPTOKEN) -- $(CXX_FLAGS) -- $<
+	makedepend -Y -f $@ -s $(DEPTOKEN) -- $(CXX_FLAGS) -- $< &> /dev/null
 
 clean:
 	rm -rf __output.cc main *.bin *.out *.dSYM *.d *.bak
 	git checkout -- main.cc
+
+main.bin: data.in
 
 sinclude main.d

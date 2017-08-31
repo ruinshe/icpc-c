@@ -11,4 +11,9 @@ inline void checkmax(T& a, const T& b) {
   if (a < b) a = b;
 }
 
+template<typename T>
+inline T sqr(const T& x) {
+  return x * x;
+}
+
 #endif  // NUMERIC_H

@@ -34,6 +34,6 @@ inline edge_t* add_edge(edge_t** head, int u, int v) {
   return cure++;
 }
 
-#define foreach(head, iter) for (edge_t::iterator it = head; it.has_next(); it++)
+#define foreach(head, it) for (edge_t::iterator it = head; it.has_next(); it++)
 
 #endif // SIMPLE_GRAPH_H
