@@ -9,3 +9,6 @@
 /output/
 /testrunner/
 *.dSYM
+*.d
+*.o
+*.bak

@@ -2,6 +2,7 @@
 #include <cmath>
 #include <cstring>
 #include <cstdlib>
+#include <limits>
 #include <algorithm>
 #include <queue>
 #include <vector>
@@ -18,6 +19,10 @@
 
 namespace {
 
-#define for_each_test_cases(T) int T; scanf("%d", &T); for (int cas = 1; cas <= T; cas++)
+#define for_each_test_cases(T)                  \
+  TokenizeReader reader(::stdin, MaxN);         \
+  int T;                                        \
+  scanf("%d", &T);                              \
+  for (int cas = 1; cas <= T; cas++)
 
 }  // namesapce
