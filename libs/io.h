@@ -2,6 +2,9 @@
 #define IO_H
 
 #include <cstdio>
+#include <limits>
+
+namespace {
 
 class TokenizeReader {
 public:
@@ -33,7 +36,8 @@ TokenizeReader::~TokenizeReader() {
 void TokenizeReader::Read(char *s, size_t &len, int max_len) {
   len = 0;
   while (EnsureRead() && IsInValidCharacter(buffer_[pos_])) pos_++;
-  while (len < max_len && EnsureRead() && !IsInValidCharacter(buffer_[pos_])) {
+  while ((int) len < max_len && EnsureRead()
+      && !IsInValidCharacter(buffer_[pos_])) {
     s[len++] = buffer_[pos_++];
   }
 }
@@ -71,5 +75,6 @@ bool TokenizeReader::IsInValidCharacter(int c) {
   return c == ' ' || c == '\t' || c == '\n' || c == EOF;
 }
 
-#endif  // IO_H
+}
 
+#endif  // IO_H

@@ -1,6 +1,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <cstdio>
+
 namespace {
 
 auto default_print_function = [](const int& x) -> void {
@@ -29,7 +31,7 @@ auto default_print_function = [](const int& x) -> void {
   }
 #define print_matrix(mp, n, m) print_matrix(mp, n, m, default_print_function)
 
-}  // namesapce
+}  // namespace
 
 #endif  // UTILS_H
 

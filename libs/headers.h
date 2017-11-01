@@ -17,12 +17,14 @@
 #include <tuple>
 #include <cassert>
 
+#include "io.h"
+
 namespace {
 
-#define for_each_test_cases(T)                  \
-  TokenizeReader reader(::stdin, MaxN);         \
-  int T;                                        \
-  scanf("%d", &T);                              \
+#define for_each_test_cases(T, BUFFSIZE)            \
+  TokenizeReader reader(::stdin, BUFFSIZE);         \
+  int T;                                            \
+  scanf("%d", &T);                                  \
   for (int cas = 1; cas <= T; cas++)
 
 }  // namesapce

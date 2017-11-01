@@ -2,7 +2,7 @@ CXX_FLAGS=-O2 -std=c++14
 DEPTOKEN='\# MAKEDEPENDS'
 
 
-all: main.bin
+all: main.bin pbcopy
 
 %.bin: %.o
 	g++ $< -o $@ $(CXX_FLAGS)
@@ -21,5 +21,8 @@ clean:
 	git checkout -- main.cc
 
 main.bin: data.in
+
+pbcopy:
+	pbcopy < __output.cc
 
 sinclude main.d
