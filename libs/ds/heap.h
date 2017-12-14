@@ -1,6 +1,10 @@
 #ifndef HEAP_H
 #define HEAP_H
 
+#ifndef MaxH
+#define MaxH 1005
+#endif
+
 #include <algorithm>
 
 template<typename T>

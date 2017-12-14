@@ -1,6 +1,10 @@
 #ifndef SBT_T
 #define SBT_T
 
+#ifndef MaxM
+#define MaxM 1005
+#endif
+
 template<typename K , typename V>
 struct sbt_t {
   struct node_t {

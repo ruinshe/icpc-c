@@ -1,6 +1,11 @@
 #ifndef SW_H
 #define SW_H
 
+#ifndef MaxN
+#define MaxN 1005
+#endif
+
+#include <algorithm>
 #include <limits>
 
 int flow[MaxN][MaxN], distance[MaxN];

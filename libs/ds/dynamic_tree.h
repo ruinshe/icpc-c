@@ -1,6 +1,10 @@
 #ifndef DYNAMIC_TREE_H
 #define DYNAMIC_TREE_H
 
+#ifndef MaxN
+#define MaxN 1005
+#endif
+
 struct node_t {
   node_t *c[2], *p;
   int key, s;

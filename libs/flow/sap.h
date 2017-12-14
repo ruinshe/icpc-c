@@ -1,6 +1,20 @@
 #ifndef SAP_H
 #define SAP_H
 
+#include <algorithm>
+
+#ifndef MaxN
+#define MaxN 1005
+#endif
+
+#ifndef MaxE
+#define MaxE 10005
+#endif
+
+#ifndef INF
+#define INF 0x3F3F3F3F
+#endif
+
 namespace __sap {
   struct edge_t {
     int v, cap;
@@ -9,7 +23,7 @@ namespace __sap {
   int dist[MaxN], low[MaxN], gap[MaxN], pre[MaxN];
   int n, s, t;
 
-  inline void add_edge(from, to, ccap, rcap) {
+  inline void add_edge(int from, int to, int ccap, int rcap) {
     cur->v = to;
     cur->cap = ccap;
     cur->next = head[from];
@@ -38,7 +52,7 @@ namespace __sap {
         if (iter->cap && dist[u] == dist[v] + 1) {
           pre[v] = u;
           pree[v] = iter;
-          low[v] = min(low[u], iter->cap);
+          low[v] = std::min(low[u], iter->cap);
           u = v;
           if (u == t) {
             do {
@@ -58,7 +72,7 @@ namespace __sap {
         for (edge_t *iter = head[u]; iter; iter = iter->next) {
           if (iter->cap) {
             int v = iter->v;
-            dist[u] = min(dist[u], dist[v] + 1);
+            dist[u] = std::min(dist[u], dist[v] + 1);
           }
         }
         gap[dist[u]]++;

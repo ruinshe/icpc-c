@@ -1,6 +1,13 @@
 #ifndef GRAHAM_H
 #define GRAHAM_H
 
+#include <algorithm>
+#include <cmath>
+#include "point.h"
+
+#ifndef MaxS
+#define MaxS 1005
+#endif
 
 template<typename T>
 double graham(point_t<T>* p, int n) {

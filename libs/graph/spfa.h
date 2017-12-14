@@ -3,11 +3,15 @@
 
 #include "graph.h"
 
+#ifndef MaxN
+#define MaxN 10005
+#endif
+
 void spfa(int s, int n, edge_t **head, long long *distance) {
   static int queue[MaxN];
   static bool visited[MaxN];
   int f = 0, b = 0, u, v;
-  for (int i = 1; i <= n; i++) {
+  for (int i = 0; i <= n; i++) {
     distance[i] = 0x3F3F3F3F3F3F3F3FLL;
     visited[i] = false;
   }

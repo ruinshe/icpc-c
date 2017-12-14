@@ -1,6 +1,12 @@
 #ifndef CONVEX_3D_H
 #define CONVEX_3D_H
 
+#include "point3.h"
+
+#ifndef MaxN
+#define MaxN 305
+#endif
+
 struct convex_t {
   struct face_t { int a, b, c; bool is_final_face; };
   int n;

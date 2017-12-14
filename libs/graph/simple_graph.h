@@ -3,6 +3,10 @@
 
 #include <cassert>
 
+#ifndef MaxE
+#define MaxE 10005
+#endif
+
 #ifndef MACRO_GRAPH_EXTRA_FIELDS
 #define MACRO_GRAPH_EXTRA_FIELDS
 #endif // MACRO_GRAPH_EXTRA_FIELDS

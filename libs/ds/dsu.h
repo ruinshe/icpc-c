@@ -1,6 +1,10 @@
 #ifndef DSU_H
 #define DSU_H
 
+#ifndef MaxN
+#define MaxN 1005
+#endif
+
 struct dsu_t {
   int f[MaxN];
 

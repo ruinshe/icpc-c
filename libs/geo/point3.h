@@ -1,6 +1,9 @@
 #ifndef POINT3_H
 #define POINT3_H
 
+#include <cstdio>
+#include <cmath>
+
 struct point3_t {
   double x, y, z;
   point3_t() {}

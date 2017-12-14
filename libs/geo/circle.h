@@ -1,6 +1,8 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
+#include <cmath>
+
 const double PI = acos(-1.0);
 const double eps = 1e-16;
 

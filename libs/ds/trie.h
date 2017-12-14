@@ -5,6 +5,14 @@
 #define TRIE_DATA
 #endif
 
+#ifndef MaxM
+#define MaxM 1005
+#endif
+
+#ifndef MaxC
+#define MaxC 26
+#endif
+
 struct trie_t {
   struct node_t {
     TRIE_DATA;
