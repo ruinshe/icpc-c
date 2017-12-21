@@ -1,6 +1,5 @@
-CXX_FLAGS=-O2 -std=c++14 -m64
+CXX_FLAGS=-O2 -std=gnu++0x -isystem .
 DEPTOKEN='\# MAKEDEPENDS'
-
 
 all: main.bin pbcopy
 
@@ -19,7 +18,7 @@ main.m:
 
 %.d: %.cc
 	@echo $(DEPTOKEN) > $@
-	makedepend -Y -f $@ -s $(DEPTOKEN) -- $(CXX_FLAGS) -- $< &> /dev/null
+	makedepend -Y -f $@ -s $(DEPTOKEN) -- -O2 -std=gnu++0x -- $< &> /dev/null
 
 clean:
 	rm -rf __output.cc main *.bin *.out *.dSYM *.d *.bak *.o *.m
