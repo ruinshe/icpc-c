@@ -4,6 +4,20 @@
 bool not_prime[MaxN];
 int primes[MaxN], phi[MaxN], f[MaxN], np;
 
+int calc_phi(int x) {
+  int res = x;
+  for (int i = 2; i * i <= x; i++) {
+    if (x % i == 0) {
+      while (x % i == 0) {
+        x /= i;
+      }
+      res = res / i * (i - 1);
+    }
+  }
+  if (x > 1) res = res / x * (x - 1);
+  return res;
+}
+
 void init_primes() {
   not_prime[1] = true;
   f[1] = 1;

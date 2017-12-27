@@ -78,9 +78,9 @@ namespace hashing {
     }
   };
 
-  void hash(const std::string& s, hash_t& result) {
+  void hash(const char* s, const int& n, hash_t& result) {
     if (!hash_inited) hash_init();
-    int& n = result.length = s.length();
+    result.length = n;
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < n; j++) {
         if (j == 0) {
@@ -94,6 +94,9 @@ namespace hashing {
     }
   }
   
+  void hash(const std::string& s, hash_t& result) {
+    hash(s.c_str(), s.length(), result);
+  }
 }
 
 #endif // HASHING_H
