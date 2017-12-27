@@ -1,33 +1,33 @@
-CXX_FLAGS=-O2 -std=gnu++0x -isystem .
+CXX_FLAGS=-O2 -std=gnu++0x -isystem . -DIDEA_TIME_EVALUATE
 DEPTOKEN='\# MAKEDEPENDS'
 
 all: main.bin pbcopy
 
 %.bin: %.o FORCE
-	g++ $< -o $@ $(CXX_FLAGS)
-	./$@ < data.in
+	@g++ $< -o $@ $(CXX_FLAGS)
+	@./$@ < data.in
 
 %.o: %.cc %.d
-	g++ $< -c -o $@ $(CXX_FLAGS)
-	python include_replacer.py $< > __output.cc
+	@g++ $< -c -o $@ $(CXX_FLAGS)
+	@python include_replacer.py $< > __output.cc
 
 %.m: %.cc %.d FORCE
-	g++ -E $< |grep -v ^#|indent > $@
+	@g++ -E $< |grep -v ^#|indent > $@
 
 main.m:
 
 %.d: %.cc
 	@echo $(DEPTOKEN) > $@
-	makedepend -Y -f $@ -s $(DEPTOKEN) -- -O2 -std=gnu++0x -- $< &> /dev/null
+	@makedepend -Y -f $@ -s $(DEPTOKEN) -- -O2 -std=gnu++0x -- $< &> /dev/null
 
 clean:
-	rm -rf __output.cc main *.bin *.out *.dSYM *.d *.bak *.o *.m
-	git checkout -- main.cc
+	@rm -rf __output.cc main *.bin *.out *.dSYM *.d *.bak *.o *.m
+	@git checkout -- main.cc
 
 main.bin: data.in
 
 pbcopy:
-	pbcopy < __output.cc
+	@pbcopy < __output.cc
 
 FORCE:
 

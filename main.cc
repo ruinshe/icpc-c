@@ -1,6 +1,5 @@
-#include <bits/stdc++.h>
+#include "libs/headers.h"
 
-int main() {
-  return 0;
+void solve() {
 }
 

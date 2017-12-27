@@ -1,30 +1,17 @@
-#include <cstdio>
-#include <cmath>
-#include <cstring>
-#include <cstdlib>
-#include <limits>
-#include <algorithm>
-#include <queue>
-#include <vector>
-#include <numeric>
-#include <iostream>
-#include <list>
-#include <map>
-#include <set>
-#include <unordered_map>
-#include <unordered_set>
-#include <functional>
-#include <tuple>
-#include <cassert>
+#include <bits/stdc++.h>
 
-#include "io.h"
+void solve();
 
-namespace {
+int main() {
+#ifdef IDEA_TIME_EVALUATE
+  clock_t start = clock();
+#endif
+  solve();
+#ifdef IDEA_TIME_EVALUATE
+  clock_t end = clock();
+  fprintf(stderr, "INFO: Solution ends with %.0f ms.\n",
+          (end - start) * 1000.0 / CLOCKS_PER_SEC);
+#endif
+  return 0;
+}
 
-#define for_each_test_cases(T, BUFFSIZE)            \
-  TokenizeReader reader(::stdin, BUFFSIZE);         \
-  int T;                                            \
-  scanf("%d", &T);                                  \
-  for (int cas = 1; cas <= T; cas++)
-
-}  // namesapce
