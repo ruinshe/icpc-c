@@ -1,18 +1,23 @@
-CXX_FLAGS=-O2 -std=gnu++0x -isystem . -DIDEA_TIME_EVALUATE
+CXX_FLAGS=-O2 -std=gnu++0x -isystem . -DIDEA_TIME_EVALUATE -Itestlib
 DEPTOKEN='\# MAKEDEPENDS'
 
-all: main.bin pbcopy
+all: run_solution pbcopy
 
-%.bin: %.o FORCE
-	@g++ $< -o $@ $(CXX_FLAGS)
-	@./$@ < data.in
+%.bin: %.o
+	g++ $< -o $@ $(CXX_FLAGS)
+
+run_solution: main.bin
+	@./$< < data.in
+	@python include_replacer.py main.cc > __output.cc
+
+run_generator: generator.bin
+	@./$< main > data.in
 
 %.o: %.cc %.d
 	@g++ $< -c -o $@ $(CXX_FLAGS)
-	@python include_replacer.py $< > __output.cc
 
 %.m: %.cc %.d FORCE
-	@g++ -E $< |grep -v ^#|indent > $@
+	g++ -E $< |grep -v ^#|indent > $@
 
 main.m:
 
@@ -22,7 +27,7 @@ main.m:
 
 clean:
 	@rm -rf __output.cc main *.bin *.out *.dSYM *.d *.bak *.o *.m
-	@git checkout -- main.cc
+	@git checkout -- main.cc generator.cc
 
 main.bin: data.in
 
@@ -32,3 +37,5 @@ pbcopy:
 FORCE:
 
 sinclude main.d
+sinclude generator.d
+
