@@ -1,5 +1,7 @@
 CXX_FLAGS=-O2 -std=gnu++0x -isystem . -DIDEA_TIME_EVALUATE -Itestlib
 DEPTOKEN='\# MAKEDEPENDS'
+CID=900
+PID=C
 
 all: run_solution pbcopy
 
@@ -12,6 +14,9 @@ run_solution: main.bin
 
 run_generator: generator.bin
 	@./$< main > data.in
+
+prepare_data:
+	scrapy runspider data-downloader.py -a contestId=${CID} -a problemId=${PID}
 
 %.o: %.cc %.d
 	@g++ $< -c -o $@ $(CXX_FLAGS)
