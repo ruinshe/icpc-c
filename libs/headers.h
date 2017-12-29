@@ -3,6 +3,9 @@
 void solve();
 
 int main() {
+#ifdef IDEA_TIME_EVALUATE
+  freopen("data.in", "r", stdin);
+#endif
   while (scanf("%*[ \t\n]*") != EOF) {
 #ifdef IDEA_TIME_EVALUATE
     clock_t start = clock();
