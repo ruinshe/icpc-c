@@ -1,7 +1,6 @@
 CXX_FLAGS=-O2 -std=gnu++0x -isystem . -DIDEA_TIME_EVALUATE -Itestlib
 DEPTOKEN='\# MAKEDEPENDS'
-CID=900
-PID=C
+include config.mk
 
 all: run_solution pbcopy
 
@@ -32,7 +31,7 @@ main.m:
 
 clean:
 	@rm -rf __output.cc main *.bin *.out *.dSYM *.d *.bak *.o *.m
-	@git checkout -- main.cc generator.cc
+	@git checkout -- main.cc generator.cc config.mk
 
 main.bin: data.in
 
