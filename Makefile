@@ -34,7 +34,7 @@ main.m:
 
 clean:
 	@rm -rf __output.cc main *.bin *.out *.dSYM *.d *.bak *.o *.m
-	@git checkout -- main.cc generator.cc config.mk
+	@git checkout -- main.cc generator.cc
 
 main.bin: data.in
 

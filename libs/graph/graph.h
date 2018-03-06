@@ -1,7 +1,9 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
+#ifndef MACRO_GRAPH_EXTRA_FIELDS
 #define MACRO_GRAPH_EXTRA_FIELDS int weight;
+#endif
 
 #include "simple_graph.h"
 

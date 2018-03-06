@@ -42,13 +42,30 @@ namespace hashing {
                        + value.values[1] + HASH_MOD[2] + value.values[2]);
     }
 
+    hash_value operator-(const hash_value& other) const {
+      hash_value result;
+      for (int i = 0; i < 3; i++) {
+        result.values[i] = values[i] - other.values[i];
+        if (result.values[i] < 0) {
+          result.values[i] += HASH_MOD[i];
+        }
+      }
+      return result;
+    }
+
     bool operator==(const hash_value& other) const {
       return values[0] == other.values[0]
         && values[1] == other.values[1]
         && values[2] == other.values[2];
     }
+
+    bool operator!=(const hash_value& other) const {
+      return values[0] != other.values[0]
+        || values[1] != other.values[1]
+        || values[2] != other.values[2];
+    }
   };
-  
+
   typedef std::unordered_set<hash_value, hash_value> hash_value_table;
 
   struct hash_t {
@@ -93,7 +110,7 @@ namespace hashing {
       }
     }
   }
-  
+
   void hash(const std::string& s, hash_t& result) {
     hash(s.c_str(), s.length(), result);
   }
