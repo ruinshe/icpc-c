@@ -10,14 +10,15 @@ generate_and_run: run_generator run_solution
 
 run_solution: main.bin FORCE
 	@echo "running solution..."
-	@./$<
+	@./$< < data.in > user.out
 	@python include_replacer.py main.cc > __output.cc
+	@bash -c "dwdiff -L -3 <(nl data.out) <(nl user.out) | head | colordiff"
 
 run_generator: generator.bin FORCE
 	@echo "generating data..."
 	@./$< $$RANDOM$$RANDOM$$RANDOM$$RANDOM > data.in
 
-prepare_data:
+prepare_data: clean
 	scrapy runspider data-downloader.py -a contestId=${CID} -a problemId=${PID}
 
 %.o: %.cc %.d
@@ -33,7 +34,7 @@ main.m:
 	@makedepend -Y -f $@ -s $(DEPTOKEN) -- -O2 -std=gnu++0x -- $< &> /dev/null
 
 clean:
-	@rm -rf __output.cc main *.bin *.out *.dSYM *.d *.bak *.o *.m
+	@rm -rf __output.cc main *.bin *.dSYM *.d *.bak *.o *.m
 	@git checkout -- main.cc generator.cc
 
 main.bin: data.in
@@ -45,4 +46,3 @@ FORCE:
 
 sinclude main.d
 sinclude generator.d
-

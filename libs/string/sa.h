@@ -45,16 +45,16 @@ void calc_height(T *s, int *sa, int *h, int len) {
 }
 
 template<typename T>
-inline void print_sa(T *s, int start, int len, int offset) {
+inline void print_sa(T *s, int start, int len, int offset = 'a', char end_char = '\n') {
   for (int i = start; i <= len; i++) {
     int c = s[i] - offset + 'a';
     if (c >= 'a' && c <= 'z') {
-      putchar(c);
+      fprintf(stderr, "%c", c);
     } else {
-      printf("[%d]", s[i]);
+      fprintf(stderr, "[%d]", s[i]);
     }
   }
-  puts("");
+  fprintf(stderr, "%c", end_char);
 }
 
 void calc_rmq(int dp[MaxL][MaxN], int len) {
