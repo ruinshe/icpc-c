@@ -1,46 +1,44 @@
-CXX_FLAGS=-O2 -g -std=gnu++0x -isystem . -DIDEA_TIME_EVALUATE -Itestlib
+CXX_FLAGS=-O2 -g -std=c++17 -isystem . -DIDEA_TIME_EVALUATE -Itestlib
 DEPTOKEN='\# MAKEDEPENDS'
 include config.mk
 
-all: run_solution pbcopy
+all: run_solution
 generate_and_run: run_generator run_solution
 
 %.bin: %.o
 	@g++ $< -o $@ $(CXX_FLAGS)
 
-run_solution: main.bin FORCE
-	@echo "running solution..."
-	@./$< < data.in > user.out
-	@python include_replacer.py main.cc > __output.cc
-	@bash -c "dwdiff -L -3 <(nl data.out) <(nl user.out) | head | colordiff"
+run_solution: main.bin cmd/diff FORCE
+	./$< < data.in > user.out
+	python include_replacer.py main.cc > __output.cc
+	cmd/diff data.in user.out data.out
 
 run_generator: generator.bin FORCE
-	@echo "generating data..."
-	@./$< $$RANDOM$$RANDOM$$RANDOM$$RANDOM > data.in
+	./$< $$RANDOM$$RANDOM$$RANDOM$$RANDOM > data.in
 
 prepare_data: clean
 	scrapy runspider data-downloader.py -a contestId=${CID} -a problemId=${PID}
 
-%.o: %.cc %.d
-	@g++ $< -c -o $@ $(CXX_FLAGS)
+%.o: %.cc # %.d
+	g++ $< -c -o $@ $(CXX_FLAGS)
 
 %.m: %.cc %.d FORCE
 	g++ -E $< |grep -v ^#|indent > $@
 
 main.m:
 
-%.d: %.cc
-	@echo $(DEPTOKEN) > $@
-	@makedepend -Y -f $@ -s $(DEPTOKEN) -- -O2 -std=gnu++0x -- $< &> /dev/null
+# %.d: %.cc
+# 	@echo $(DEPTOKEN) > $@
+# 	@makedepend -Y -f $@ -s $(DEPTOKEN) -- -O2 -std=C++17 -- $< &> /dev/null
 
 clean:
-	@rm -rf __output.cc main *.bin *.dSYM *.d *.bak *.o *.m
-	@git checkout -- main.cc generator.cc
+	rm -rf __output.cc main *.bin *.dSYM *.d *.bak *.o *.m
+	git checkout -- main.cc generator.cc
 
 main.bin: data.in
 
-pbcopy:
-	@pbcopy < __output.cc
+cmd/diff: cmd/diff.cc cmd/testlib.h
+	g++ -o $@ --std=gnu++0x $<
 
 FORCE:
 

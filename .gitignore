@@ -14,3 +14,4 @@
 *.o
 *.bak
 __pycache__
+/cmd/diff
