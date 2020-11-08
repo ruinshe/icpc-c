@@ -1,11 +1,9 @@
 /__output.cc
-/*.in
-/*.out
-/*.exe
-/*.bin
-/main
+*.in
+*.out
+*.exe
+*.bin
 /tasks/
-/.idea/
 /output/
 /testrunner/
 /topcoder/
@@ -14,6 +12,4 @@
 *.o
 *.bak
 __pycache__
-/cmd/diff
 /sol.cc
-/sol.bin

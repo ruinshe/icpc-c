@@ -9,10 +9,10 @@ generate_and_sol: run_generator run_standard run_solution FORCE
 %.bin: %.o
 	@g++ $< -o $@ $(CXX_FLAGS)
 
-run_solution: main.bin cmd/diff FORCE
+run_solution: main.bin cmd/diff.bin FORCE
 	./$< < data.in > user.out
 	python include_replacer.py main.cc > __output.cc
-	cmd/diff data.in user.out data.out
+	cmd/diff.bin data.in user.out data.out
 
 run_standard: sol.bin FORCE
 	./$< < data.in > data.out
@@ -38,12 +38,9 @@ main.m:
 
 clean:
 	rm -rf __output.cc main *.bin *.dSYM *.d *.bak *.o *.m sol.* user.out
-	git checkout -- main.cc generator.cc
+	git checkout -- main.cc generator.cc cmd/diff.cc
 
 main.bin: data.in
-
-cmd/diff: cmd/diff.cc cmd/testlib.h
-	g++ -o $@ --std=gnu++0x $<
 
 FORCE:
 
