@@ -15,3 +15,5 @@
 *.bak
 __pycache__
 /cmd/diff
+/sol.cc
+/sol.bin
