@@ -1,4 +1,4 @@
-CXX_FLAGS=-O2 -g -std=c++17 -isystem . -Itestlib # -DIDEA_TIME_EVALUATE -D__DEBUG__
+CXX_FLAGS=-O2 -g -std=c++17 -Wall -isystem . -Itestlib -DIDEA_TIME_EVALUATE
 DEPTOKEN='\# MAKEDEPENDS'
 include config.mk
 
@@ -16,7 +16,7 @@ run_solution: main.bin cmd/diff.bin FORCE
 
 run_standard: sol.bin FORCE
 	./$< < data.in > data.out
-	head -n 2 data.out
+	head -c 10 data.out
 
 run_generator: generator.bin FORCE
 	./$< $$RANDOM$$RANDOM$$RANDOM$$RANDOM > data.in
