@@ -13,21 +13,69 @@
 #define MaxC 26
 #endif
 
-struct trie_t {
-  struct node_t {
-    TRIE_DATA;
-    node_t* next[MaxC];
-  } memo[MaxM], *root, *cur;
+namespace trie {
 
-  void init() {
-    cur = memo;
-    root = new_node();
+struct node_t {
+  TRIE_DATA;
+  node_t *next[MaxC];
+
+#ifdef TRIE_AC
+  node_t *fail;
+#endif // TRIE_AC
+} memo[MaxM], *root, *cur;
+
+node_t *new_node() {
+  std::fill(cur->next, cur->next + MaxC, root);
+#ifdef TRIE_AC
+  cur->fail = root;
+#endif
+  return cur++;
+}
+
+void init() {
+  cur = root = memo;
+  root = new_node();
+}
+
+node_t *add(const char *s) {
+  node_t *now = root;
+  for (const char *p = s; *p; p++) {
+    int c = *p - 'a';
+    if (now->next[c] == root) {
+      now->next[c] = new_node();
+    }
+    now = now->next[c];
+  }
+  return now;
+}
+
+#ifdef TRIE_AC
+node_t *queue[MaxM];
+
+int bfs() {
+  int f = 0, b = 0;
+  root->fail = root;
+
+  queue[b++] = root;
+  while (f < b) {
+    node_t *u = queue[f++];
+
+    for (int i = 0; i < MaxC; i++) {
+      node_t *v = u->next[i];
+      if (v != root) {
+        if (u != root) {
+          v->fail = u->fail->next[i];
+        }
+        queue[b++] = v;
+      } else {
+        u->next[i] = u->fail->next[i];
+      }
+    }
   }
 
-  node_t* new_node() {
-    memset(cur, 0, sizeof(node_t));
-    return cur++;
-  }
-};
+  return b;
+}
+#endif // TRIE_AC
+};     // namespace trie
 
 #endif
