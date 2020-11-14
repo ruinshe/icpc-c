@@ -46,3 +46,4 @@ FORCE:
 sinclude main.d
 sinclude generator.d
 sinclude sol.d
+sinclude cmd/diff.d

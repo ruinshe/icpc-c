@@ -14,24 +14,24 @@
 struct edge_t {
   int to;
   MACRO_GRAPH_EXTRA_FIELDS
-  edge_t* next;
+  edge_t *next;
 
   struct iterator {
-    edge_t* iter;
-    iterator(edge_t* _iter) : iter(_iter) {}
-    iterator& operator++(int) {
+    edge_t *iter;
+    iterator(edge_t *_iter) : iter(_iter) {}
+    iterator &operator++(int) {
       assert(iter);
       iter = iter->next;
       return *this;
     }
     bool has_next() const { return iter != NULL; }
-    edge_t& operator*() const { return *iter; }
-    edge_t* operator->() const { return iter; }
+    edge_t &operator*() const { return *iter; }
+    edge_t *operator->() const { return iter; }
   };
-  
+
 } edges[MaxE], *cure;
 
-inline edge_t* add_edge(edge_t** head, int u, int v) {
+inline edge_t *add_edge(edge_t **head, int u, int v) {
   cure->to = v;
   cure->next = head[u];
   head[u] = cure;
